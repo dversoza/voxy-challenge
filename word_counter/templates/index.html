@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Voxy Challenge</h1>
+
+<h2>Welcome to Word Counter, an easy way to count words</h2>
+
+<form action="." method="POST" novalidate>
+    {% csrf_token %}
+
+    <div>
+        {% for field in form %}
+        <div>
+            {{ field.label_tag }} {{ field }}
+            {% for error in field.errors %}
+            <p class="error-message">{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endfor %}
+
+        <button type="submit">Count words</button>
+
+        {% if word_count %}
+        <p>There are <span>{{ word_count }}</span> words in the text you entered.</p>
+        {% endif %}
+
+    </div>
+
+</form>
+
+{% endblock %}
